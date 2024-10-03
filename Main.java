@@ -44,21 +44,21 @@ public class Main {
         String[] arrOfStrPatternOnComma = strStarting.split(", ");
         // output for the array element
         // this is a for : each loop - very handy when examining array elements.
-        int elementNum;
+        int elementNum = 0;
         for (String thePart : arrOfStrPatternOnComma) {
-            System.out.println("element of string: " + thePart);
+            System.out.println("Element " + elementNum + " of string: " + thePart);
             elementNum++;
         }
         System.out.println();
         String[] arrOfStrPartsOnSpace = arrOfStrPatternOnComma[0].split(" ");
         for( String thePart : arrOfStrPartsOnSpace) {
-            System.out.println("element of string:" + thePart);
+            System.out.println("Element " + elementNum + " of string:" + thePart);
         }
         System.out.println();
         String[] arrOfStrPartsOnSpace02 = arrOfStrPatternOnComma[1].split(" ");
         elementNum = 0;
         for( String thePart : arrOfStrPartsOnSpace02) {
-            System.out.println("element of string:" + thePart);
+            System.out.println("Element " + elementNum + " of string:" + thePart);
         }
         System.out.println();
         String ageInYears = arrOfStrPartsOnSpace[0];
