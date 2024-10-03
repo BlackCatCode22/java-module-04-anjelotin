@@ -1,33 +1,75 @@
+// Angelo Andrade
+// App.java
+// 10/3/24
 package angelo.zoo.com;
 
-
-// Angelo Andrade
-// 9/26/24
-// App.java
-
-//Driver file for the zoo midterm program
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("\n Welcome to my Zoo Program");
+        System.out.println("\n Welcome to Zoo Program!");
 
-        System.out.println("\n Number of animals is: " + angelo.zoo.com.Animal.numOfAnimals);
+        // This is all the date stuff we did last week
+        // The current date
+        Date today = new Date();
+        // Correct format for today's date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatterYear = new SimpleDateFormat("yyyy");
 
-        angelo.zoo.com.Animal myAnimal = new angelo.zoo.com.Animal();
-        myAnimal.setAnimalName("my first name");
-        System.out.println("\n The name of the new animal is: " + myAnimal.getAnimalName());
+        // Format the date and store it in a string
+        String strTodaysDate = formatter.format(today);
+        String strTodaysYear = formatterYear.format(today);
 
-        angelo.zoo.com.Animal anotherAnimal = new angelo.zoo.com.Animal("Zig");
-        System.out.println("\n The name of the second animal is: " + anotherAnimal.getAnimalName());
+        System.out.println("\n today's date is: " + strTodaysDate);
 
-        System.out.println("\n Number of animals is: " + angelo.zoo.com.Animal.numOfAnimals);
+        // Input for the animal
+        String strStarting = "12 year old male hyena, born in fall, brown color, 150 pounds, from Friguia Park, Tunisia";
+        String[] arrOfStrPatternOnComma = strStarting.split(", ");
 
-        // Create a hyena with a name
-        angelo.zoo.com.Hyena aNewHyena = new angelo.zoo.com.Hyena("Kamari");
+        // Parsing age and birth season
+        String[] arrOfStrPartsOnSpace = arrOfStrPatternOnComma[0].split(" ");
+        String ageInYears = arrOfStrPartsOnSpace[0];
+        String animalBirthSeason = arrOfStrPartsOnSpace[3]; // Corrected index for season
+        System.out.println("The age in years of the animal is: " + ageInYears);
+        System.out.println("The season of birth of the animal is: " + animalBirthSeason);
 
-        System.out.println(" The nw hyena's name is: " + aNewHyena.getAnimalName());
-        System.out.println("the number of animals: " + angelo.zoo.com.Animal.numOfAnimals);
+        // Calculate the birthdate
+        String animalBirthdate = calculateBirthdate(ageInYears, animalBirthSeason, strTodaysYear);
+        System.out.println("\n animalBirthdate = " + animalBirthdate);
 
+        // Testing the Animal constructor
+        Animal myNewAnimal = new Animal("male", 4, 70, "Zig", "Hy01", animalBirthdate, "brown spots", "from San Diego Zoo");
 
+        // Prove it
+        System.out.println("\n this is the new animal!");
+        System.out.println("\n ID is: " + myNewAnimal.getAnimalID() + " and... name is: " + myNewAnimal.getAnimalName() + "\n");
+    }
+
+    // Method to calculate the birthdate based on age and season
+    private static String calculateBirthdate(String ageInYears, String animalBirthSeason, String strTodaysYear) {
+        int todaysYear = Integer.parseInt(strTodaysYear);
+        int animalBirthYear = todaysYear - Integer.parseInt(ageInYears);
+        String birthdate = "";
+
+        switch (animalBirthSeason.toLowerCase()) {
+            case "fall":
+                birthdate = animalBirthYear + "-09-21";
+                break;
+            case "spring":
+                birthdate = animalBirthYear + "-03-21";
+                break;
+            case "summer":
+                birthdate = animalBirthYear + "-06-21";
+                break;
+            case "winter":
+                birthdate = animalBirthYear + "-12-21";
+                break;
+            default:
+                birthdate = "Season not recognized";
+                break;
+        }
+
+        return birthdate;
     }
 }

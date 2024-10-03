@@ -5,8 +5,8 @@ public class Hyena extends angelo.zoo.com.Animal {
     static int numOfHyenas = 0;
 
     // Create a constructor.
-    public Hyena(String someName) {
-        super(someName);
+    public Hyena() {
+        super();
         numOfHyenas++;
     }
 }
