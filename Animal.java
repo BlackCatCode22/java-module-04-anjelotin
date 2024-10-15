@@ -1,6 +1,4 @@
 package angelo.zoo.com;
-import java.util.Date;
-
 
 
 public class Animal {

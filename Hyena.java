@@ -9,4 +9,5 @@ public class Hyena extends angelo.zoo.com.Animal {
         super();
         numOfHyenas++;
     }
+
 }

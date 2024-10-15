@@ -1,10 +1,13 @@
 // Angelo Andrade
 // App.java
-// 10/3/24
+// 10/15/24
 package angelo.zoo.com;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
@@ -23,53 +26,45 @@ public class App {
 
         System.out.println("\n today's date is: " + strTodaysDate);
 
-        // Input for the animal
-        String strStarting = "12 year old male hyena, born in fall, brown color, 150 pounds, from Friguia Park, Tunisia";
-        String[] arrOfStrPatternOnComma = strStarting.split(", ");
+        // parse the string
+        // Open arrivingAnimals with BufferedFileReader
 
-        // Parsing age and birth season
-        String[] arrOfStrPartsOnSpace = arrOfStrPatternOnComma[0].split(" ");
-        String ageInYears = arrOfStrPartsOnSpace[0];
-        String animalBirthSeason = arrOfStrPartsOnSpace[3]; // Corrected index for season
-        System.out.println("The age in years of the animal is: " + ageInYears);
-        System.out.println("The season of birth of the animal is: " + animalBirthSeason);
+        BufferedReader reader = null;
 
-        // Calculate the birthdate
-        String animalBirthdate = calculateBirthdate(ageInYears, animalBirthSeason, strTodaysYear);
-        System.out.println("\n animalBirthdate = " + animalBirthdate);
+        try {
+            // Create a BufferedReader object to read from the file
+            reader = new BufferedReader(new FileReader("C:\\Users\\BE218\\IdeaProjects\\animalClasses\\src\\angelo\\zoo\\com\\arrivingAnimals.txt"));
 
-        // Testing the Animal constructor
-        Animal myNewAnimal = new Animal("male", 4, 70, "Zig", "Hy01", animalBirthdate, "brown spots", "from San Diego Zoo");
+            String line;
+            // Read lines from the file until the end is reached
+            while ((line = reader.readLine()) != null) {
+                // Print each line to the console
+                System.out.println(line);
 
-        // Prove it
-        System.out.println("\n this is the new animal!");
-        System.out.println("\n ID is: " + myNewAnimal.getAnimalID() + " and... name is: " + myNewAnimal.getAnimalName() + "\n");
-    }
+                // Parse
 
-    // Method to calculate the birthdate based on age and season
-    private static String calculateBirthdate(String ageInYears, String animalBirthSeason, String strTodaysYear) {
-        int todaysYear = Integer.parseInt(strTodaysYear);
-        int animalBirthYear = todaysYear - Integer.parseInt(ageInYears);
-        String birthdate = "";
+                
 
-        switch (animalBirthSeason.toLowerCase()) {
-            case "fall":
-                birthdate = animalBirthYear + "-09-21";
-                break;
-            case "spring":
-                birthdate = animalBirthYear + "-03-21";
-                break;
-            case "summer":
-                birthdate = animalBirthYear + "-06-21";
-                break;
-            case "winter":
-                birthdate = animalBirthYear + "-12-21";
-                break;
-            default:
-                birthdate = "Season not recognized";
-                break;
+
+            }
+        } catch (IOException e) {
+            // Handle potential IO exceptions
+            System.err.println("Error reading the file: " + e.getMessage());
+        } finally {
+            // Close the BufferedReader to free up resources
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Error closing the file: " + e.getMessage());
+            }
         }
 
-        return birthdate;
+
+        // Input for the animal
+
+
+
     }
 }
